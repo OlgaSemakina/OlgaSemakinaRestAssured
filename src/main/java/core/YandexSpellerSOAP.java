@@ -8,6 +8,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static constants.Constants.*;
@@ -55,12 +56,10 @@ public class YandexSpellerSOAP {
                     HEADER.open() +
                     BODY.open() +
                     OPEN_SPEL.open() +
-                    soapReq.action.reqName() + " " + PARAM_LANG + "=" + QUOTES + (
-                    soapReq.params.getOrDefault(PARAM_LANG, Language.EN.langCode()))
-                    + QUOTES + " " + PARAM_OPTIONS + "=" + QUOTES + (
-                    soapReq.params.getOrDefault(PARAM_OPTIONS, Options.computeOptions()))
-                    + QUOTES
-                    + " " + PARAM_FORMAT + "=" + OPEN_SPEL.close() +
+                    soapReq.action.reqName() + soapReq.wrapParameters(PARAM_LANG, soapReq.params.getOrDefault
+                    (PARAM_LANG, Language.EN.langCode())) + soapReq.wrapParameters(PARAM_OPTIONS,
+                    soapReq.params.getOrDefault(PARAM_OPTIONS, Options.computeOptions())) +
+                    soapReq.wrapParameters(PARAM_FORMAT) + OPEN_SPEL.close() +
                     SPEL_TEXT.open() + (
                     soapReq.params.getOrDefault(PARAM_TEXT, ""))
                     + SPEL_TEXT.close() +
@@ -91,6 +90,12 @@ public class YandexSpellerSOAP {
                 .addHeader("Host", "speller.yandex.net")
                 .setBaseUri(YANDEX_SPELLER_SOAP_URI)
                 .build();
+    }
+
+    String wrapParameters(String param_name, String... param) {
+        String paramToString = Arrays.toString(param);
+        return SPACE + param_name + EQUAL + QUOTES +
+                paramToString.substring(1, paramToString.length() - 1) + QUOTES;
     }
 
 }

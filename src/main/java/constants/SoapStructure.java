@@ -6,7 +6,7 @@ public enum SoapStructure {
     HEADER("   <soapenv:Header/>\n", ""),
     BODY("   <soapenv:Body>\n", "   </soapenv:Body>\n"),
     SPEL_TEXT("         <spel:text>", "</spel:text>\n"),
-    OPEN_SPEL("      <spel:", "\"\">\n"),
+    OPEN_SPEL("      <spel:", ">\n"),
     CLOSE_SPEl("      </spel:", ">\n");
 
 

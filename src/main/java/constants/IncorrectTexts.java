@@ -5,8 +5,8 @@ import java.util.List;
 
 public enum IncorrectTexts {
 
-    FIRST_TEXT("Have you ever dramed of running a bookshop?", "dreamed"),
-    SECOND_TEXT("Grannies are vey important for femle elephants.", "very", "female"),
+    MISSING_LETTER("Have you ever dramed of running a bookshop?", "dreamed"),
+    SEVERAL_MISSING_LETTERS("Grannies are vey important for femle elephants.", "very", "female"),
 
     RUSSIAN("Этот текст на руском языке", "русском"),
     ENGLISH("This text is written in Englsh language", "English"),
@@ -16,7 +16,8 @@ public enum IncorrectTexts {
     WRONG_CAPITALIZATION("This text contains wrong capitalization of london", "London"),
     REPEATED_WORDS_TEXT("This text contains contains repeated words", "contains"),
 
-    RUSSIAN_ENG_LETTER("Этот текст на руcском языке", "русском");
+    RUSSIAN_ENG_LETTER("Этот текст на руссGGком языке", "русском");
+
     private String text;
     private List<String> corrections;
 
